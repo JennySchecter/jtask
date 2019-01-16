@@ -111,7 +111,6 @@ class TraceController extends Controller{
                 return $this->redirect(['batch']);
             }else{
                 //注：数据量太多需要ajax翻页
-
                 //要查询的转单号存入cache
                 Yii::$app->cache->set('expressArr',$expressArr);
                 $shiftArr = [];
