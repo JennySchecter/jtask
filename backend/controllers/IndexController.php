@@ -1,0 +1,60 @@
+<?php
+namespace backend\controllers;
+
+use Yii;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use backend\models\Admin;
+
+/**
+ * Site controller
+ */
+class IndexController extends CommonController
+{
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $this->layout = 'main';
+        return $this->render('index');
+    }
+
+    /**
+     * Login action.
+     *
+     * @return string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new Admin();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            $model->password = '';
+
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return string
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+}
