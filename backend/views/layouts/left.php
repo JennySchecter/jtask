@@ -20,8 +20,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <!--<li><a href="<?/*=yii\helpers\Url::to(['/adminrole/route'])*/?>"><i class="fa fa-circle-o"></i> 路由</a></li>
-                    <li><a href="<?/*=yii\helpers\Url::to(['/adminrole/permission'])*/?>"><i class="fa fa-circle-o"></i> 权限</a></li>-->
+                    <li><a href="<?=yii\helpers\Url::to(['/adminrole/route'])?>"><i class="fa fa-circle-o"></i> 路由</a></li>
+                    <li><a href="<?=yii\helpers\Url::to(['/adminrole/permission'])?>"><i class="fa fa-circle-o"></i> 权限</a></li>
                     <li><a href="<?=yii\helpers\Url::to(['/adminrole/role'])?>"><i class="fa fa-circle-o"></i> 角色</a></li>
                     <li><a href="<?=yii\helpers\Url::to(['/adminrole/assignment'])?>"><i class="fa fa-circle-o"></i> 分配</a></li>
                     <!--<li><a href="/adminrole/menu"><i class="fa fa-circle-o"></i> 菜单</a></li>-->
