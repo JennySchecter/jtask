@@ -114,11 +114,11 @@ class TraceController extends Controller{
                 //要查询的转单号存入cache
                 Yii::$app->cache->set('expressArr',$expressArr);
                 $shiftArr = [];
-                if (count($expressArr) < 200) {
+                if (count($expressArr) < 10) {
                     $shiftArr = Yii::$app->cache->get('expressArr');
                     $more = false;
                 }else{
-                    for ($i = 1; $i <= 200; $i++) {
+                    for ($i = 1; $i <= 10; $i++) {
                         $shiftArr[] = array_shift($expressArr);
                     }
                     Yii::$app->cache->set('expressArr',$expressArr);
@@ -165,7 +165,7 @@ class TraceController extends Controller{
         $traceLists = Yii::$app->cache->get('traceLists');
         return $this->render('batch-trace',[
             'traceLists'=>$traceLists,
-            'more' => $more,
+            'more' => 1,
         ]);
     }
 
@@ -176,11 +176,10 @@ class TraceController extends Controller{
     {
         $expressNum = Yii::$app->cache->get('expressArr');
         $more = 1;
-        $result = ['html' => '', 'more' => 1];
         if ( !empty($expressNum) ) {
-            if( count($expressNum) > 200 ){
+            if( count($expressNum) > 10 ){
                 $shiftArr = [];
-                for ($i = 1; $i <= 200; $i++){
+                for ($i = 1; $i <= 10; $i++){
                     $shiftArr[] = array_shift($expressNum);
                 }
                 Yii::$app->cache->set('expressNum',$expressNum);
@@ -200,6 +199,12 @@ class TraceController extends Controller{
                 $valueArr = array_values($result['data']);
                 $traceLists = array_combine($shiftArr,$valueArr);
 
+                //加载出来的数据push到traceLists 的cache中
+                $allTraceLists = Yii::$app->cache->get('traceLists');
+                foreach ($traceLists as $k=>$v){
+                    $allTraceLists[$k] = $v;
+                }
+                Yii::$app->cache->set('traceLists',$allTraceLists);
                 foreach ($traceLists as $k => $v){
                     if (is_array($v)) {
                         $html .= '<tr><td><input type="checkbox" name="expressNum" value="' . $k . '">' . $k .'</td>';
