@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'method' => 'get',
         ]); ?>
         <?= Html::submitButton('导出数据', ['class' => 'btn btn-primary']) ?>
-        <?php ActiveForm::end(); ?>
+
     </div>
     <?php
     try{
@@ -97,6 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     }
      ?>
+    <?php ActiveForm::end(); ?>
     <div class="form-group">
         <label for="name">批量分配分组</label>
         <select class="form-control"  name="group">
